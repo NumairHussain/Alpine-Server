@@ -1,0 +1,24 @@
+## General Idea of What's Happening
+
+- Github Actions
+    - All Services
+        - Start All Services
+        - Stop All Services
+        - Update All Services
+        - Restart All Services
+    - Per Service
+        - Minecraft Server
+            - Start
+            - Stop
+            - Update
+            - Restart
+        - Pi-Hole
+            - Start
+            - Start
+            - Update
+            - Restart
+        - Jellyfin
+            - Start
+            - Stop
+            - Update
+            - Restart

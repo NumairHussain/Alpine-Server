@@ -1,0 +1,16 @@
+.venv/
+jellyfin/cache/
+jellyfin/config/
+jellyfin/downloads/
+jellyfin/jellyfin-web/
+jellyfin/jellyseerr/
+jellyfin/lidarr/
+jellyfin/prowlarr/
+jellyfin/qbittorrent/
+jellyfin/radarr/
+jellyfin/sonarr/
+jellyfin/media/
+olympus-server/minecraft-data
+olympus-server/duck.log
+olympus-server/duck.sh
+pi-hole/etc-pihole

@@ -1,0 +1,25 @@
+version: "3"
+services:
+  minecraft:
+    image: itzg/minecraft-bedrock-server:latest
+    container_name: minecraft_bedrock
+    ports:
+      - "19132:19132/udp"  # Default Bedrock server port (UDP)
+    environment:
+      EULA: "TRUE"  # Accept Minecraft EULA
+      GAMEMODE: survival  # Options: survival, creative, adventure
+      DIFFICULTY: hard  # Options: peaceful, easy, normal, hard
+      LEVEL_NAME: "Olympus"  # Name of your world
+      SERVER_NAME: "Olympus"  # Server name in game
+      ALLOW_CHEATS: "false"  # Enable/disable cheats
+      SHOWCOORDINATES: "true"  # Show coordinates in-game
+      MAX_PLAYERS: 10  # Maximum number of players
+      ONLINE_MODE: "true"  # Require Microsoft account login
+      WHITE_LIST: "false"  # Enable/disable whitelist
+      LEVEL_TYPE: "DEFAULT"  # World type: DEFAULT, FLAT, LEGACY
+      # Add more environment variables as needed (see https://hub.docker.com/r/itzg/minecraft-bedrock-server)
+    volumes:
+      - ./minecraft-data:/data  # Persist world data and configs
+    restart: unless-stopped  # Restart container unless manually stopped
+    stdin_open: true  # Allow console interaction
+    tty: true  # Allocate a pseudo-TTY

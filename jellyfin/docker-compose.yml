@@ -1,0 +1,176 @@
+  services:
+    jellyfin:
+      image: jellyfin/jellyfin
+      container_name: jellyfin
+      devices:
+        - /dev/dri:/dev/dri
+      volumes:
+        - ./config:/config
+        - ./media:/media
+        - ./cache:/cache
+        - tool_vol:./jellyfin-web
+      ports:
+        - "8096:8096"
+      networks:
+        - media-net
+      restart: unless-stopped
+
+    jellyseerr:
+      image: fallenbagel/jellyseerr:latest
+      container_name: jellyseerr
+      environment:
+        - LOG_LEVEL=info
+        - TZ=America/New_York
+      volumes:
+        - ./jellyseerr/config:/app/config
+      ports:
+        - "5055:5055"
+      networks:
+        - media-net
+      restart: unless-stopped
+
+    duckdns-updater:
+      image: linuxserver/duckdns
+      container_name: duckdns-updater
+      environment:
+        - PUID=0
+        - PGID=0
+        - TZ=America/New_York
+        - SUBDOMAINS=nhjellyfin
+        - TOKEN=${DUCK_DNS_TOKEN}
+      restart: unless-stopped
+
+    nginx:
+      image: nginx:latest
+      container_name: nginx
+      volumes:
+        - ./nginx/conf.d:/etc/nginx/conf.d
+        - /etc/letsencrypt:/etc/letsencrypt:ro
+      networks:
+        - media-net
+      ports:
+        - "80:80"
+        - "443:443"
+      restart: unless-stopped
+
+    pia-vpn:
+      image: haugene/transmission-openvpn:latest
+      container_name: pia-vpn
+      cap_add:
+        - NET_ADMIN
+      environment:
+        - OPENVPN_PROVIDER=PIA
+        - OPENVPN_USERNAME=${OPENVPN_USERNAME}
+        - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+        - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
+        - TZ=America/New_York
+        - PUID=0
+        - PGID=0
+      networks:
+        - media-net
+      restart: unless-stopped
+
+    sonarr:
+      image: linuxserver/sonarr
+      container_name: sonarr
+      environment:
+        - PUID=0
+        - PGID=0
+        - TZ=America/New_York
+      volumes:
+        - ./jellyfin/sonarr/config:/config
+        - ./jellyfin/media:/media
+        - ./jellyfin/downloads:/downloads
+      ports:
+        - "8989:8989"
+      depends_on:
+        - pia-vpn
+      networks:
+        - media-net
+      restart: unless-stopped
+
+    radarr:
+      image: linuxserver/radarr
+      container_name: radarr
+      environment:
+        - PUID=0
+        - PGID=0
+        - TZ=America/New_York
+      volumes:
+        - ./jellyfin/radarr/config:/config
+        - ./jellyfin/media:/media
+        - ./jellyfin/downloads:/downloads
+      ports:
+        - "7878:7878"
+      depends_on:
+        - pia-vpn
+      networks:
+        - media-net
+      restart: unless-stopped
+
+    lidarr:
+      image: linuxserver/lidarr
+      container_name: lidarr
+      environment:
+        - PUID=0
+        - PGID=0
+        - TZ=America/New_York
+      volumes:
+        - ./lidarr/config:/config
+        - ./media:/media
+        - ./downloads:/downloads
+      ports:
+        - "8686:8686"
+      depends_on:
+        - pia-vpn
+      networks:
+        - media-net
+      restart: unless-stopped
+
+    prowlarr:
+      image: lscr.io/linuxserver/prowlarr:latest
+      container_name: prowlarr
+      environment:
+        - PUID=0
+        - PGID=0
+        - TZ=America/New_York
+      volumes:
+        - ./jellyfin/prowlarr/config:/config
+      ports:
+        - "9696:9696"
+      depends_on:
+        - pia-vpn
+      networks:
+        - media-net
+      restart: unless-stopped
+
+    qbittorrent:
+      image: linuxserver/qbittorrent
+      container_name: qbittorrent
+      environment:
+        - PUID=0
+        - PGID=0
+        - TZ=America/New_York
+        - WEBUI_PORT=8080
+      volumes:
+        - ./qbittorrent/config:/config
+        - ./downloads:/downloads
+      ports:
+        - "8080:8080"
+      depends_on:
+        - pia-vpn
+      networks:
+        - media-net
+      restart: unless-stopped
+
+  volumes:
+    tool_vol:
+      driver: local
+      driver_opts:
+        type: none
+        device: /root/Docker/jellyfin/jellyfin-web
+        o: bind
+
+  networks:
+    media-net:
+      driver: bridge
