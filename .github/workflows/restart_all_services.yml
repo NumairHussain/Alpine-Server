@@ -1,4 +1,5 @@
-name: Restarting All Services
+name: Restart All Services
+run-name: ${{ github.actor }} Restarted All Services
 on:
     workflow_dispatch:
 

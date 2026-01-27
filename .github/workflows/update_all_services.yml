@@ -1,4 +1,5 @@
 name: Update All Services
+run-name: ${{ github.actor }} Updated All Services
 on:
     workflow_dispatch:
 

@@ -1,4 +1,5 @@
-name: Starting All Services
+name: Start All Services
+run-name: ${{ github.actor }} Started All Services
 on:
     workflow_dispatch:
 

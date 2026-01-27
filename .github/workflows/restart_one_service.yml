@@ -1,4 +1,5 @@
-name: Restarting One Services
+name: Restart One Service
+run-name: ${{ github.actor }} Restarted One Service - ${{ github.event.inputs.service_name }}
 on:
     workflow_dispatch:
         inputs:

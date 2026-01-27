@@ -1,4 +1,5 @@
-name: Stopping All Service
+name: Stop All Services
+run-name: ${{ github.actor }} Stopped All Services
 on:
     workflow_dispatch:
         inputs:
