@@ -1,97 +1,101 @@
 name: Update One Service
 on:
-  workflow_dispatch:
-    inputs:
-      service_name:
-        description: Choose the service to update
-        required: true
-        type: choice
-        options:
-          - Jellyfin
-          - Olympus
-          - Pi-Hole
+    workflow_dispatch:
+        inputs:
+            service_name:
+                description: Choose the service to update
+                required: true
+                type: choice
+                options:
+                    - Jellyfin
+                    - Olympus
+                    - Pi-Hole
 
 
 jobs:
-  update_service:
-    runs-on: [
-      self-hosted,
-      linux,
-      X64,
-      Alpine
-    ]
-    steps:
-    -   name: Checkout repository
-        uses: actions/checkout@v4
-      
+    update_service:
+        runs-on: [
+            self-hosted,
+            linux,
+            X64,
+            Alpine
+        ]
+        steps:
+        -   name: Checkout repository
+            uses: actions/checkout@v4
+        
 
-    -   name: Update Jellyfin Services
-        if: ${{ github.event.inputs.service_name == 'Jellyfin' }}
-        run: |
-            echo "Updating Jellyfin service..."
+        -   name: Update Jellyfin Services
+            if: ${{ github.event.inputs.service_name == 'Jellyfin' }}
+            run: |
+                echo "Updating Jellyfin service..."
 
-            cd jellyfin
-            if [ $? -ne 0 ]; then
-                echo "Error: Changing Directory to Jellyfin failed";
-                exit 1;
-            fi
+                cd jellyfin
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Jellyfin failed";
+                    exit 1;
+                fi
 
-            docker compose pull
-            if [ $? -ne 0 ]; then
-                echo "Error: Pulling latest Jellyfin stack image failed";
-                exit 1;
-            fi
+                docker compose pull
+                if [ $? -ne 0 ]; then
+                    echo "Error: Pulling latest Jellyfin stack image failed";
+                    exit 1;
+                fi
 
-            docker compose up -d
-            if [ $? -ne 0 ]; then
-                echo "Error: Starting updated Jellyfin service failed";
-                exit 1;
-            fi
+                docker compose up -d
+                if [ $? -ne 0 ]; then
+                    echo "Error: Starting updated Jellyfin service failed";
+                    exit 1;
+                fi
 
-    -   name: Update Olympus Service
-        if: ${{ github.event.inputs.service_name == 'Olympus' }}
-        run: |
-            echo "Updating Olympus service..."
+                exit 0;
 
-            cd olympus-server
-            if [ $? -ne 0 ]; then
-                echo "Error: Changing Directory to Olympus-Server failed";
-                exit 1;
-            fi
+        -   name: Update Olympus Service
+            if: ${{ github.event.inputs.service_name == 'Olympus' }}
+            run: |
+                echo "Updating Olympus service..."
 
-            docker compose pull
-            if [ $? -ne 0 ]; then
-                echo "Error: Pulling latest minecraft-bedrock image failed";
-                exit 1;
-            fi
+                cd olympus-server
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Olympus-Server failed";
+                    exit 1;
+                fi
 
-            docker compose up -d
-            if [ $? -ne 0 ]; then
-                echo "Error: Starting updated service olympus-server failed";
-                exit 1;
-            fi
+                docker compose pull
+                if [ $? -ne 0 ]; then
+                    echo "Error: Pulling latest minecraft-bedrock image failed";
+                    exit 1;
+                fi
 
-            exit 0;
+                docker compose up -d
+                if [ $? -ne 0 ]; then
+                    echo "Error: Starting updated service olympus-server failed";
+                    exit 1;
+                fi
 
-    -   name: Update Pi-Hole Service
-        if: ${{ github.event.inputs.service_name == 'Pi-Hole' }}
-        run: |
-            echo "Updating Pi-Hole service..."
+                exit 0;
 
-            cd pi-hole
-            if [ $? -ne 0 ]; then
-                echo "Error: Changing Directory to Pi-Hole failed";
-                exit 1;
-            fi
+        -   name: Update Pi-Hole Service
+            if: ${{ github.event.inputs.service_name == 'Pi-Hole' }}
+            run: |
+                echo "Updating Pi-Hole service..."
 
-            docker compose pull
-            if [ $? -ne 0 ]; then
-                echo "Error: Pulling latest Pi-Hole image failed";
-                exit 1;
-            fi
+                cd pi-hole
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Pi-Hole failed";
+                    exit 1;
+                fi
 
-            docker compose up -d
-            if [ $? -ne 0 ]; then
-                echo "Error: Starting updated Pi-Hole service failed";
-                exit 1;
-            fi
+                docker compose pull
+                if [ $? -ne 0 ]; then
+                    echo "Error: Pulling latest Pi-Hole image failed";
+                    exit 1;
+                fi
+
+                docker compose up -d
+                if [ $? -ne 0 ]; then
+                    echo "Error: Starting updated Pi-Hole service failed";
+                    exit 1;
+                fi
+
+                exit 0;

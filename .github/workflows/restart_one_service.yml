@@ -1,0 +1,99 @@
+name: Restarting All Services
+on:
+    workflow_dispatch:
+        inputs:
+            service_name:
+                description: Choose the service to start
+                required: true
+                type: choice
+                options:
+                    - Jellyfin
+                    - Olympus
+                    - Pi-Hole
+
+jobs:
+    update_service:
+        runs-on: [
+            self-hosted,
+            linux,
+            X64,
+            Alpine
+        ]
+        steps:
+        -   name: Checkout repository
+            uses: actions/checkout@v4
+
+        -   name: Restarting Jellyfin Services
+            if: ${{ github.event.inputs.service_name == 'Jellyfin' }}
+            run: |
+                echo "Restarting Jellyfin service..."
+
+                cd jellyfin
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Jellyfin failed";
+                    exit 1;
+                fi
+
+                docker compose down
+                if [ $? -ne 0 ]; then
+                    echo "Error: Stopping Jellyfin stack failed";
+                    exit 1;
+                fi
+
+                docker compose up -d
+                if [ $? -ne 0 ]; then
+                    echo "Error: Starting Jellyfin stack failed";
+                    exit 1;
+                fi
+
+                exit 0;
+
+        -   name: Restarting Olympus Service
+            if: ${{ github.event.inputs.service_name == 'Olympus' }}
+            run: |
+                echo "Restarting Olympus service..."
+
+                cd olympus-server
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Olympus-Server failed";
+                    exit 1;
+                fi
+
+                docker compose down
+                if [ $? -ne 0 ]; then
+                    echo "Error: Stopping Olympus Server failed";
+                    exit 1;
+                fi
+
+                docker compose up -d
+                if [ $? -ne 0 ]; then
+                    echo "Error: Starting Olympus Server failed";
+                    exit 1;
+                fi
+
+                exit 0;
+
+        -   name: Restarting Pi-Hole Service
+            if: ${{ github.event.inputs.service_name == 'Pi-Hole' }}
+            run: |
+                echo "Restarting Pi-Hole service..."
+
+                cd pi-hole
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Pi-Hole failed";
+                    exit 1;
+                fi
+
+                docker compose down
+                if [ $? -ne 0 ]; then
+                    echo "Error: Stopping Pi-Hole failed";
+                    exit 1;
+                fi
+
+                docker compose up -d
+                if [ $? -ne 0 ]; then
+                    echo "Error: Starting Pi-Hole failed";
+                    exit 1;
+                fi
+
+                exit 0;

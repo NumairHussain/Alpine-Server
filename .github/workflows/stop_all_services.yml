@@ -1,0 +1,78 @@
+name: Stopping One Service
+on:
+    workflow_dispatch:
+        inputs:
+            service_name:
+                description: Choose the service to stop
+                required: true
+                type: choice
+                options:
+                    - Jellyfin
+                    - Olympus
+                    - Pi-Hole
+
+jobs:
+    update_service:
+        runs-on: [
+            self-hosted,
+            linux,
+            X64,
+            Alpine
+        ]
+        steps:
+        -   name: Checkout repository
+            uses: actions/checkout@v4
+
+        -   name: Stopping Jellyfin Services
+            run: |
+                echo "Stopping Jellyfin service..."
+
+                cd jellyfin
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Jellyfin failed";
+                    exit 1;
+                fi
+
+                docker compose down
+                if [ $? -ne 0 ]; then
+                    echo "Error: Stopping Jellyfin stack failed";
+                    exit 1;
+                fi
+
+                exit 0;
+
+        -   name: Stopping Olympus Service
+            run: |
+                echo "Stopping Olympus service..."
+
+                cd olympus-server
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Olympus-Server failed";
+                    exit 1;
+                fi
+
+                docker compose down
+                if [ $? -ne 0 ]; then
+                    echo "Error: Stopping minecraft-bedrock failed";
+                    exit 1;
+                fi
+
+                exit 0;
+
+        -   name: Stopping Pi-Hole Service
+            run: |
+                echo "Stopping Pi-Hole service..."
+
+                cd pi-hole
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Pi-Hole failed";
+                    exit 1;
+                fi
+
+                docker compose down
+                if [ $? -ne 0 ]; then
+                    echo "Error: Stopping Pi-Hole failed";
+                    exit 1;
+                fi
+
+                exit 0;

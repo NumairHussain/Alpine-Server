@@ -1,0 +1,81 @@
+name: Starting All Services
+on:
+    workflow_dispatch:
+        inputs:
+            service_name:
+                description: Choose the service to start
+                required: true
+                type: choice
+                options:
+                    - Jellyfin
+                    - Olympus
+                    - Pi-Hole
+
+jobs:
+    update_service:
+        runs-on: [
+            self-hosted,
+            linux,
+            X64,
+            Alpine
+        ]
+        steps:
+        -   name: Checkout repository
+            uses: actions/checkout@v4
+
+        -   name: Starting Jellyfin Services
+            if: ${{ github.event.inputs.service_name == 'Jellyfin' }}
+            run: |
+                echo "Starting Jellyfin service..."
+
+                cd jellyfin
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Jellyfin failed";
+                    exit 1;
+                fi
+
+                docker compose up -d
+                if [ $? -ne 0 ]; then
+                    echo "Error: Starting Jellyfin stack failed";
+                    exit 1;
+                fi
+
+                exit 0;
+
+        -   name: Starting Olympus Service
+            if: ${{ github.event.inputs.service_name == 'Olympus' }}
+            run: |
+                echo "Starting Olympus service..."
+
+                cd olympus-server
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Olympus-Server failed";
+                    exit 1;
+                fi
+
+                docker compose up -d
+                if [ $? -ne 0 ]; then
+                    echo "Error: Starting Olympus Server failed";
+                    exit 1;
+                fi
+
+                exit 0;
+
+        -   name: Starting Pi-Hole Service
+            if: ${{ github.event.inputs.service_name == 'Pi-Hole' }}
+            run: |
+                echo "Starting Pi-Hole service..."
+
+                cd pi-hole
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing Directory to Pi-Hole failed";
+                    exit 1;
+                fi
+
+                docker compose up -d
+                if [ $? -ne 0 ]; then
+                    echo "Error: Starting Pi-Hole failed";
+                    exit 1;
+                fi
+
+                exit 0;
