@@ -2,15 +2,6 @@ name: Stop All Services
 run-name: ${{ github.actor }} Stopped All Services
 on:
     workflow_dispatch:
-        inputs:
-            service_name:
-                description: Choose the service to stop
-                required: true
-                type: choice
-                options:
-                    - Jellyfin
-                    - Olympus
-                    - Pi-Hole
 
 jobs:
     update_service:
