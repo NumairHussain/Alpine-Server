@@ -16,6 +16,10 @@ jobs:
             uses: actions/checkout@v4
 
         -   name: Restarting Jellyfin Services
+            env:
+                OPENVPN_PASSWORD: ${{ secrets.OPENVPN_PASSWORD }}
+                OPENVPN_USERNAME: ${{ secrets.OPENVPN_USERNAME }}
+                DUCK_DNS_TOKEN: ${{ secrets.DUCK_DNS_TOKEN }}
             run: |
                 echo "Restarting Jellyfin service..."
 
@@ -36,8 +40,6 @@ jobs:
                     echo "Error: Starting Jellyfin stack failed";
                     exit 1;
                 fi
-
-                exit 0;
 
         -   name: Restarting Olympus Service
             run: |
@@ -61,8 +63,6 @@ jobs:
                     exit 1;
                 fi
 
-                exit 0;
-
         -   name: Restarting Pi-Hole Service
             run: |
                 echo "Restarting Pi-Hole service..."
@@ -84,5 +84,3 @@ jobs:
                     echo "Error: Starting Pi-Hole failed";
                     exit 1;
                 fi
-
-                exit 0;

@@ -31,8 +31,6 @@ jobs:
                     exit 1;
                 fi
 
-                exit 0;
-
         -   name: Stopping Olympus Service
             run: |
                 echo "Stopping Olympus service..."
@@ -49,8 +47,6 @@ jobs:
                     exit 1;
                 fi
 
-                exit 0;
-
         -   name: Stopping Pi-Hole Service
             run: |
                 echo "Stopping Pi-Hole service..."
@@ -66,5 +62,3 @@ jobs:
                     echo "Error: Stopping Pi-Hole failed";
                     exit 1;
                 fi
-
-                exit 0;

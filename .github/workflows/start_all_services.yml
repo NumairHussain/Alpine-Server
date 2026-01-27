@@ -2,6 +2,17 @@ name: Start All Services
 run-name: ${{ github.actor }} Started All Services
 on:
     workflow_dispatch:
+        # inputs:
+        #     secrets:
+        #         OPENVPN_PASSWORD:
+        #             description: 'OpenVPN Password'
+        #             required: true
+        #         OPENVPN_USERNAME:
+        #             description: 'OpenVPN Username'
+        #             required: true
+        #         DUCK_DNS_TOKEN:
+        #             description: 'Duck DNS Token'
+        #             required: true
 
 jobs:
     update_service:
@@ -16,6 +27,10 @@ jobs:
             uses: actions/checkout@v4
 
         -   name: Starting Jellyfin Services
+            env:
+                OPENVPN_PASSWORD: ${{ secrets.OPENVPN_PASSWORD }}
+                OPENVPN_USERNAME: ${{ secrets.OPENVPN_USERNAME }}
+                DUCK_DNS_TOKEN: ${{ secrets.DUCK_DNS_TOKEN }}
             run: |
                 echo "Starting Jellyfin service..."
 
@@ -30,8 +45,6 @@ jobs:
                     echo "Error: Starting Jellyfin stack failed";
                     exit 1;
                 fi
-
-                exit 0;
 
         -   name: Starting Olympus Service
             run: |
@@ -49,8 +62,6 @@ jobs:
                     exit 1;
                 fi
 
-                exit 0;
-
         -   name: Starting Pi-Hole Service
             run: |
                 echo "Starting Pi-Hole service..."
@@ -66,5 +77,3 @@ jobs:
                     echo "Error: Starting Pi-Hole failed";
                     exit 1;
                 fi
-
-                exit 0;

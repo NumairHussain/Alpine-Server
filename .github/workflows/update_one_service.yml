@@ -27,6 +27,10 @@ jobs:
         
 
         -   name: Update Jellyfin Services
+            env:
+                OPENVPN_PASSWORD: ${{ secrets.OPENVPN_PASSWORD }}
+                OPENVPN_USERNAME: ${{ secrets.OPENVPN_USERNAME }}
+                DUCK_DNS_TOKEN: ${{ secrets.DUCK_DNS_TOKEN }}
             if: ${{ github.event.inputs.service_name == 'Jellyfin' }}
             run: |
                 echo "Updating Jellyfin service..."
@@ -48,8 +52,6 @@ jobs:
                     echo "Error: Starting updated Jellyfin service failed";
                     exit 1;
                 fi
-
-                exit 0;
 
         -   name: Update Olympus Service
             if: ${{ github.event.inputs.service_name == 'Olympus' }}
@@ -74,8 +76,6 @@ jobs:
                     exit 1;
                 fi
 
-                exit 0;
-
         -   name: Update Pi-Hole Service
             if: ${{ github.event.inputs.service_name == 'Pi-Hole' }}
             run: |
@@ -98,5 +98,3 @@ jobs:
                     echo "Error: Starting updated Pi-Hole service failed";
                     exit 1;
                 fi
-
-                exit 0;

@@ -25,6 +25,10 @@ jobs:
             uses: actions/checkout@v4
 
         -   name: Starting Jellyfin Services
+            env:
+                OPENVPN_PASSWORD: ${{ secrets.OPENVPN_PASSWORD }}
+                OPENVPN_USERNAME: ${{ secrets.OPENVPN_USERNAME }}
+                DUCK_DNS_TOKEN: ${{ secrets.DUCK_DNS_TOKEN }}
             if: ${{ github.event.inputs.service_name == 'Jellyfin' }}
             run: |
                 echo "Starting Jellyfin service..."
@@ -40,8 +44,6 @@ jobs:
                     echo "Error: Starting Jellyfin stack failed";
                     exit 1;
                 fi
-
-                exit 0;
 
         -   name: Starting Olympus Service
             if: ${{ github.event.inputs.service_name == 'Olympus' }}
@@ -60,8 +62,6 @@ jobs:
                     exit 1;
                 fi
 
-                exit 0;
-
         -   name: Starting Pi-Hole Service
             if: ${{ github.event.inputs.service_name == 'Pi-Hole' }}
             run: |
@@ -78,5 +78,3 @@ jobs:
                     echo "Error: Starting Pi-Hole failed";
                     exit 1;
                 fi
-
-                exit 0;

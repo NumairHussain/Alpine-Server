@@ -41,8 +41,6 @@ jobs:
                     exit 1;
                 fi
 
-                exit 0;
-
         -   name: Stopping Olympus Service
             if: ${{ github.event.inputs.service_name == 'Olympus' }}
             run: |
@@ -60,8 +58,6 @@ jobs:
                     exit 1;
                 fi
 
-                exit 0;
-
         -   name: Stopping Pi-Hole Service
             if: ${{ github.event.inputs.service_name == 'Pi-Hole' }}
             run: |
@@ -78,5 +74,3 @@ jobs:
                     echo "Error: Stopping Pi-Hole failed";
                     exit 1;
                 fi
-
-                exit 0;
