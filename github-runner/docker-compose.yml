@@ -1,0 +1,10 @@
+services:
+  github-runner:
+    image: myoung34/github-runner
+    restart: always
+    environment:
+      RUNNER_NAME: alpine-runner
+      RUNNER_REPO: youruser/yourrepo
+      RUNNER_TOKEN: xxx
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
