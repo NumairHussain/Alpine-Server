@@ -1,4 +1,4 @@
-name: Stopping One Service
+name: Stopping All Service
 on:
     workflow_dispatch:
         inputs:

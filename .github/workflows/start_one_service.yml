@@ -1,4 +1,4 @@
-name: Starting All Services
+name: Starting One Services
 on:
     workflow_dispatch:
         inputs:
