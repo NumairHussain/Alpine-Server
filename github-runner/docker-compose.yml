@@ -4,7 +4,7 @@ services:
     restart: always
     environment:
       RUNNER_NAME: alpine-runner
-      RUNNER_REPO: youruser/yourrepo
-      RUNNER_TOKEN: xxx
+      REPO_URL: https://github.com/NumairHussain/Alpine-Server
+      RUNNER_TOKEN: ${RUNNER_TOKEN:-xxx}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
