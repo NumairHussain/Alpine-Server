@@ -78,6 +78,8 @@ jobs:
 
         -   name: Update Pi-Hole Service
             if: ${{ github.event.inputs.service_name == 'Pi-Hole' }}
+            env:
+                PIHOLE_PASSWORD: ${{ secrets.PIHOLE_PASSWORD }}
             run: |
                 echo "Updating Pi-Hole service..."
 

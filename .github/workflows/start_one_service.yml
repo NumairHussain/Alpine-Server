@@ -64,6 +64,8 @@ jobs:
 
         -   name: Starting Pi-Hole Service
             if: ${{ github.event.inputs.service_name == 'Pi-Hole' }}
+            env:
+                PIHOLE_PASSWORD: ${{ secrets.PIHOLE_PASSWORD }}
             run: |
                 echo "Starting Pi-Hole service..."
 

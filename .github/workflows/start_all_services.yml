@@ -63,6 +63,8 @@ jobs:
                 fi
 
         -   name: Starting Pi-Hole Service
+            env:
+                PIHOLE_PASSWORD: ${{ secrets.PIHOLE_PASSWORD }}
             run: |
                 echo "Starting Pi-Hole service..."
 

@@ -64,6 +64,8 @@ jobs:
                 fi
 
         -   name: Update Pi-Hole Service
+            env:
+                PIHOLE_PASSWORD: ${{ secrets.PIHOLE_PASSWORD }}
             run: |
                 echo "Updating Pi-Hole service..."
 
