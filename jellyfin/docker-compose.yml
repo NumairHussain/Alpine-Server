@@ -8,7 +8,7 @@
         - ./config:/config
         - ./media:/media
         - ./cache:/cache
-        - tool_vol:./jellyfin-web
+        - tool_vol:/home/numair/services/jellyfin/jellyfin-web
       ports:
         - "8096:8096"
       networks:
@@ -78,9 +78,9 @@
         - PGID=0
         - TZ=America/New_York
       volumes:
-        - ./jellyfin/sonarr/config:/config
-        - ./jellyfin/media:/media
-        - ./jellyfin/downloads:/downloads
+        - ./sonarr/config:/config
+        - ./media:/media
+        - ./downloads:/downloads
       ports:
         - "8989:8989"
       depends_on:
@@ -97,9 +97,9 @@
         - PGID=0
         - TZ=America/New_York
       volumes:
-        - ./jellyfin/radarr/config:/config
-        - ./jellyfin/media:/media
-        - ./jellyfin/downloads:/downloads
+        - ./radarr/config:/config
+        - ./media:/media
+        - ./downloads:/downloads
       ports:
         - "7878:7878"
       depends_on:
@@ -135,7 +135,7 @@
         - PGID=0
         - TZ=America/New_York
       volumes:
-        - ./jellyfin/prowlarr/config:/config
+        - ./prowlarr/config:/config
       ports:
         - "9696:9696"
       depends_on:
