@@ -13,7 +13,7 @@ on:
                     - Pi-Hole
 
 jobs:
-    update_service:
+    starting_one_service:
         runs-on: [
             self-hosted,
             linux,

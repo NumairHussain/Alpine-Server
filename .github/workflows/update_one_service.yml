@@ -14,7 +14,7 @@ on:
 
 
 jobs:
-    update_service:
+    update_one_service:
         runs-on: [
             self-hosted,
             linux,

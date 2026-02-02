@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    update_service:
+    update_all_services:
         runs-on: [
             self-hosted,
             linux,
