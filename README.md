@@ -1,5 +1,7 @@
 ## General Idea of What's Happening
 
+- Nginx Reverse Proxy for NHStudio.dev
+
 - Github Actions
     - All Services
         - Start All Services
@@ -18,6 +20,11 @@
             - Update
             - Restart
         - Jellyfin
+            - Start
+            - Stop
+            - Update
+            - Restart
+        - ActualBudget
             - Start
             - Stop
             - Update
