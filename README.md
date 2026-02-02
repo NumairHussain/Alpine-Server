@@ -1,6 +1,6 @@
 ## General Idea of What's Happening
 
-- Nginx Reverse Proxy for NHStudio.dev
+- Nginx Reverse Proxy for NHStudio.dev`
 
 - Github Actions
     - All Services
