@@ -50,9 +50,9 @@ jobs:
             run: |
                 echo "Starting Olympus service..."
 
-                cd olympus-server
+                cd olympus
                 if [ $? -ne 0 ]; then
-                    echo "Error: Changing Directory to Olympus-Server failed";
+                    echo "Error: Changing Directory to Olympus failed";
                     exit 1;
                 fi
 

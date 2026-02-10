@@ -18,7 +18,7 @@ services:
       LEVEL_TYPE: "DEFAULT"  # World type: DEFAULT, FLAT, LEGACY
       # Add more environment variables as needed (see https://hub.docker.com/r/itzg/minecraft-bedrock-server)
     volumes:
-      - /home/numair/services/olympus-server/minecraft-data:/data  # Persist world data and configs
+      - /home/numair/services/olympus/minecraft-data:/data  # Persist world data and configs
     restart: unless-stopped  # Restart container unless manually stopped
     stdin_open: true  # Allow console interaction
     tty: true  # Allocate a pseudo-TTY

@@ -6,8 +6,9 @@ ACTION=$2
 # Define stack locations
 declare -A STACKS
 STACKS[jellyfin]="/home/numair/services/jellyfin"
-STACKS[pihole]="/home/numair/services/pi-hole"
+STACKS[pi-hole]="/home/numair/services/pi-hole"
 STACKS[nginx]="/home/numair/services/nginx"
+STACKS[olympus]="/home/numair/services/olympus"
 STACKS[actual-budget]="/home/numair/services/actual-budget"
 
 # Check if stack exists

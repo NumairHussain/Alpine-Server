@@ -10,7 +10,7 @@ jellyfin/qbittorrent/
 jellyfin/radarr/
 jellyfin/sonarr/
 jellyfin/media/
-olympus-server/minecraft-data
-olympus-server/duck.log
-olympus-server/duck.sh
+olympus/minecraft-data
+olympus/duck.log
+olympus/duck.sh
 pi-hole/etc-pihole

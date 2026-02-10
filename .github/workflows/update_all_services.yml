@@ -45,9 +45,9 @@ jobs:
             run: |
                 echo "Updating Olympus service..."
 
-                cd olympus-server
+                cd olympus
                 if [ $? -ne 0 ]; then
-                    echo "Error: Changing Directory to Olympus-Server failed";
+                    echo "Error: Changing Directory to Olympus failed";
                     exit 1;
                 fi
 
@@ -59,7 +59,7 @@ jobs:
 
                 docker compose up -d
                 if [ $? -ne 0 ]; then
-                    echo "Error: Starting updated service olympus-server failed";
+                    echo "Error: Starting updated service olympus failed";
                     exit 1;
                 fi
 
