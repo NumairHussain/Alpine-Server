@@ -1,0 +1,50 @@
+name: Deploy Servicess
+run-name: ${{ github.actor }} Deployed Services
+on:
+    workflow_dispatch:
+        inputs:
+            service_name:
+                description: Choose the service to start
+                required: true
+                type: choice
+                options:
+                    - All Services
+                    - Jellyfin
+                    - Olympus
+                    - Pi-Hole
+                    - Nginx
+                    - Actual-Budget
+            Action:
+                description: Choose the action to perform
+                required: true
+                type: choice
+                options:
+                    - up
+                    - down
+                    - restart
+                    - update
+
+jobs:
+    deploy_service:
+        runs-on: [
+            self-hosted,
+            linux,
+            X64,
+            Alpine
+        ]
+        steps:
+        -   name: Checkout repository
+            uses: actions/checkout@v4
+
+        -   name: Deploying Services
+            env:
+                SERVICE_NAME: ${{ github.event.inputs.service_name }}
+                ACTION: ${{ github.event.inputs.Action }}
+                # Put all secrets here
+                OPENVPN_PASSWORD: ${{ secrets.OPENVPN_PASSWORD }}
+                OPENVPN_USERNAME: ${{ secrets.OPENVPN_USERNAME }}
+                DUCK_DNS_TOKEN: ${{ secrets.DUCK_DNS_TOKEN }}
+                PIHOLE_PASSWORD: ${{ secrets.PIHOLE_PASSWORD }}
+            run: |
+                echo "Deploying $SERVICE_NAME with action $ACTION..."
+                ./scripts/deploy.sh "$SERVICE_NAME" "$ACTION"
