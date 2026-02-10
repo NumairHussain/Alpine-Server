@@ -20,25 +20,25 @@ cd "${STACKS[$STACK]}"
 
 # Execute action
 case $ACTION in
-    "up")
+    "Start")
         echo "Starting $STACK..."
         docker-compose up -d
         ;;
-    "down")
+    "Stop")
         echo "Stopping $STACK..."
         docker-compose down
         ;;
-    "restart")
+    "Restart")
         echo "Restarting $STACK..."
         docker-compose restart
         ;;
-    "update")
+    "Update")
         echo "Updating $STACK..."
         docker-compose pull && docker-compose up -d
         ;;
     *)
         echo "Unknown action: $ACTION"
-        echo "Available actions: up, down, restart, update, logs, status"
+        echo "Available actions: Start, Stop, Restart, Update"
         exit 1
         ;;
 esac

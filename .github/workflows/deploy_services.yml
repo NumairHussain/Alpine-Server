@@ -1,4 +1,4 @@
-name: Deploy Servicess
+name: Deploy Services
 run-name: ${{ github.actor }} Deployed Services
 on:
     workflow_dispatch:
@@ -19,10 +19,10 @@ on:
                 required: true
                 type: choice
                 options:
-                    - up
-                    - down
-                    - restart
-                    - update
+                    - Start
+                    - Stop
+                    - Restart
+                    - Update
 
 jobs:
     deploy_service:
