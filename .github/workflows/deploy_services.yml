@@ -36,6 +36,14 @@ jobs:
         -   name: Checkout repository
             uses: actions/checkout@v4
 
+        -   name: Changing Permissions for Script
+            run: |
+                chmod +x ./scripts/deploy.sh
+                if [ $? -ne 0 ]; then
+                    echo "Error: Changing permissions for deploy script failed";
+                    exit 1;
+                fi
+
         -   name: Deploying Services
             env:
                 SERVICE_NAME: ${{ github.event.inputs.service_name }}
