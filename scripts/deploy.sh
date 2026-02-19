@@ -18,6 +18,10 @@ if [[ ! -v "STACKS[$STACK]" ]]; then
 fi
 
 cd "${STACKS[$STACK]}"
+if [[ $? -ne 0 ]]; then
+    echo "Error: Failed to navigate to stack directory"
+    exit 1
+fi
 
 # Execute action
 case $ACTION in
