@@ -5,6 +5,6 @@ services:
     environment:
       RUNNER_NAME: alpine-runner
       REPO_URL: https://github.com/NumairHussain/Alpine-Server
-      RUNNER_TOKEN: ${RUNNER_TOKEN:-xxx}
+      ACCESS_TOKEN: ${GITHUB_PAT:-xxx}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
