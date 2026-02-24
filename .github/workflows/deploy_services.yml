@@ -48,7 +48,7 @@ jobs:
             env:
                 SERVICE_NAME: ${{ github.event.inputs.service_name }}
                 ACTION: ${{ github.event.inputs.Action }}
-                
+
                 # Put all secrets here
                 OPENVPN_PASSWORD: ${{ secrets.OPENVPN_PASSWORD }}
                 OPENVPN_USERNAME: ${{ secrets.OPENVPN_USERNAME }}
@@ -56,6 +56,7 @@ jobs:
                 PIHOLE_PASSWORD: ${{ secrets.PIHOLE_PASSWORD }}
             run: |
                 echo "Deploying $SERVICE_NAME with action $ACTION..."
+                ls -la
                 ./scripts/deploy.sh "$SERVICE_NAME" "$ACTION"
                 if [ $? -ne 0 ]; then
                     echo "Error: Deployment failed";
