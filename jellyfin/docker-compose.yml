@@ -171,6 +171,3 @@
         device: /root/Docker/jellyfin/jellyfin-web
         o: bind
 
-  networks:
-    media-net:
-      driver: bridge
