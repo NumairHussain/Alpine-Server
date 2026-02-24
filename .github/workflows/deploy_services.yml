@@ -48,6 +48,7 @@ jobs:
             env:
                 SERVICE_NAME: ${{ github.event.inputs.service_name }}
                 ACTION: ${{ github.event.inputs.Action }}
+                
                 # Put all secrets here
                 OPENVPN_PASSWORD: ${{ secrets.OPENVPN_PASSWORD }}
                 OPENVPN_USERNAME: ${{ secrets.OPENVPN_USERNAME }}

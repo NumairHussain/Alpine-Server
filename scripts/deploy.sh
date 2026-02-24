@@ -4,12 +4,14 @@ STACK=$1
 ACTION=$2
 
 # Define stack locations
+ls -la
+
 declare -A STACKS
-STACKS[Jellyfin]="/home/numair/services/jellyfin"
-STACKS[Pi-Hole]="/home/numair/services/pi-hole"
-STACKS[Nginx]="/home/numair/services/nginx"
-STACKS[Olympus]="/home/numair/services/olympus"
-STACKS[Actual-Budget]="/home/numair/services/actual-budget"
+STACKS[Jellyfin]="./jellyfin"
+STACKS[Pi-Hole]="./pi-hole"
+STACKS[Nginx]="./nginx"
+STACKS[Olympus]="./olympus"
+STACKS[Actual-Budget]="./actual-budget"
 
 # Check if stack exists
 if [[ ! -v "STACKS[$STACK]" ]]; then
