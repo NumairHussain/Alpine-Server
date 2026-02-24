@@ -56,7 +56,6 @@ jobs:
                 PIHOLE_PASSWORD: ${{ secrets.PIHOLE_PASSWORD }}
             run: |
                 echo "Deploying $SERVICE_NAME with action $ACTION..."
-                ls -la
                 ./scripts/deploy.sh "$SERVICE_NAME" "$ACTION"
                 if [ $? -ne 0 ]; then
                     echo "Error: Deployment failed";

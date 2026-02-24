@@ -4,8 +4,6 @@ STACK=$1
 ACTION=$2
 
 # Define stack locations
-ls -la
-
 declare -A STACKS
 STACKS[Jellyfin]="./jellyfin"
 STACKS[Pi-Hole]="./pi-hole"
