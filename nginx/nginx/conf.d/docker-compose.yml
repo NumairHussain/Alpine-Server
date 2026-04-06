@@ -14,4 +14,4 @@ services:
         
 networks:
     media-net:
-      driver: bridge
+      external: true
