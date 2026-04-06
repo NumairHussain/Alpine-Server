@@ -15,3 +15,5 @@ olympus/duck.log
 olympus/duck.sh
 olympus-server
 pi-hole/etc-pihole
+github-runner/_work
+github-runner/runner-config

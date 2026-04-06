@@ -54,7 +54,6 @@ jobs:
                 OPENVPN_USERNAME: ${{ secrets.OPENVPN_USERNAME }}
                 DUCK_DNS_TOKEN: ${{ secrets.DUCK_DNS_TOKEN }}
                 PIHOLE_PASSWORD: ${{ secrets.PIHOLE_PASSWORD }}
-                GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
             run: |
                 echo "Deploying $SERVICE_NAME with action $ACTION..."
                 ./scripts/deploy.sh "$SERVICE_NAME" "$ACTION"

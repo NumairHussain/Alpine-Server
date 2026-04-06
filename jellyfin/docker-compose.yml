@@ -150,6 +150,10 @@
         - media-net
       restart: unless-stopped
 
+  networks:
+    media-net:
+      driver: bridge
+
   volumes:
     tool_vol:
       driver: local
