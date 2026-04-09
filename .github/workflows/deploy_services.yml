@@ -30,7 +30,7 @@ jobs:
             self-hosted,
             linux,
             X64,
-            Alpine
+            default
         ]
         steps:
         -   name: Checkout repository
