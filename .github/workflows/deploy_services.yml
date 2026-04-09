@@ -28,7 +28,7 @@ jobs:
     deploy_service:
         runs-on: [
             self-hosted,
-            linux,
+            Linux,
             X64,
             default
         ]
