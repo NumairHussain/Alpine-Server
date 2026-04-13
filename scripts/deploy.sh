@@ -9,7 +9,7 @@ STACKS[Jellyfin]="./jellyfin"
 STACKS[Pi-Hole]="./pi-hole"
 STACKS[Nginx]="./nginx/nginx/conf.d"
 STACKS[Olympus]="./olympus"
-STACKS[Actual-Budget]="./actual-budget"
+# STACKS[Actual-Budget]="./actual-budget"
 
 working_directory="$(dirname "$0")"
 all_services_flag=false
