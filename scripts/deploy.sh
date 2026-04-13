@@ -14,12 +14,6 @@ STACKS[Actual-Budget]="./actual-budget"
 working_directory="$(dirname "$0")"
 all_services_flag=false
 
-# Check if stack exists
-if [[ ! -v "STACKS[$STACK]" ]]; then
-    echo "Error: Stack '$STACK' not found"
-    exit 1
-fi
-
 if [[ "$STACK" == "All Services" ]]; then
     all_services_flag=true
     echo "Performing '$ACTION' on all services..."
