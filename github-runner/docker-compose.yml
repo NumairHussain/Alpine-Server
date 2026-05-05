@@ -9,4 +9,3 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./_work:/_work
-      - ./runner-config:/runner

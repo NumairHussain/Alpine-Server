@@ -7,7 +7,7 @@ ACTION=$2
 declare -A STACKS
 STACKS[Jellyfin]="./jellyfin"
 STACKS[Pi-Hole]="./pi-hole"
-STACKS[Nginx]="./nginx/nginx/conf.d"
+STACKS[Nginx]="./nginx"
 STACKS[Olympus]="./olympus"
 # STACKS[Actual-Budget]="./actual-budget"
 
